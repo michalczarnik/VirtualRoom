@@ -1,0 +1,40 @@
+﻿@using VirtualRoom.Models
+@model IEnumerable<RoomModel>
+<div class="title">
+    <h2>
+        All the rooms
+    </h2>
+    </div>
+    <div class="container">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            @RenderRooms()
+        </div>
+    </div>
+</div>
+
+@helper RenderRooms()
+{
+foreach (var room in Model)
+{
+        @RenderRoom(room);
+}
+}
+
+@helper RenderRoom(RoomModel rM)
+{
+    <div class="col-lg-2 col-md-4 col-sm-6 tile-external">
+        <div class="tile">
+            <div class="room-card" id="@rM.RoomID">
+                <div class="front" style="background-color:black;">
+                    <img src="~/icons/agenda.svg" />
+                    <span class="col-lg-12 col-md-12 col-sm-12">@rM.Name</span>
+                </div>
+                <div class="back" style="background-color:black;">
+                    <h4 class="col-lg-12 col-md-12 col-sm-12">@rM.Name.ToString()</h4>
+                    <span class="col-lg-12 col-md-12 col-sm-12">@rM.Description</span>
+                    <a href="/Home/Room/@rM.RoomID"> Enter Room</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

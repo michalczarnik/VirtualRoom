@@ -1,0 +1,75 @@
+﻿body {
+    background-color: dimgrey;
+    font-family: "Lucida Console", Monaco, monospace;
+    color: floralwhite;
+}
+div.container{
+    background-color:grey;
+    padding-bottom: 20px;
+}
+div.title h1 {
+    font-size: 60px;
+    text-align: center;
+}
+.tile {
+    padding-top:100%;
+    position:relative;
+    border-radius:20px;
+    perspective: 800px;
+}
+.tile-external{
+    padding: 15px;
+}
+
+.room-card {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    left: 0%;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.room-card:hover {
+    transform: rotateY( 180deg );
+}
+
+.front, .back {
+    margin: 0;
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0%;
+    left: 0%;
+    backface-visibility: hidden;
+    border-radius: 20px;
+}
+
+.back {
+    transform: rotateY( 180deg );
+}
+
+.front img{
+    display: table;
+    height:80%;
+    padding-left: 13%;
+    padding-top: 5%;
+}
+
+.front span {
+    padding-top: 3%;
+    display: table;
+    text-align: center;
+}
+
+.modal-content{
+    background-color: dimgrey;
+}
+.input-box{
+    margin-left: 10px;
+}
+.modal-content label{
+    width: 30%;
+}

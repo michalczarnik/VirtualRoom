@@ -57,3 +57,5 @@ c:\users\micha\onedrive\documents\visual studio 2015\Projects\VirtualRoom\Virtua
 c:\users\micha\onedrive\documents\visual studio 2015\Projects\VirtualRoom\VirtualRoom\obj\Debug\VirtualRoom.pdb
 c:\users\micha\onedrive\documents\visual studio 2015\Projects\VirtualRoom\VirtualRoom\bin\System.Web.Http.WebHost.dll
 c:\users\micha\onedrive\documents\visual studio 2015\Projects\VirtualRoom\VirtualRoom\bin\System.Web.Http.WebHost.xml
+C:\Users\micha\onedrive\documents\visual studio 2015\Projects\VirtualRoom\VirtualRoom\bin\MySql.Data.dll
+C:\Users\micha\onedrive\documents\visual studio 2015\Projects\VirtualRoom\VirtualRoom\bin\MySql.Web.dll

@@ -1,7 +1,9 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using VirtualRoom.Logic;
 
 namespace VirtualRoom
 {
@@ -14,6 +16,10 @@ namespace VirtualRoom
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+        protected void Session_Start(Object sender, EventArgs e)
+        {
+            Session["init"] = 0;
         }
     }
 }

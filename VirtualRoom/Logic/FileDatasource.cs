@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace VirtualRoom.Logic
 {
-    public class RoomFileDatasource : IRoomDatasource
+    public class FileDatasource : IDatasource
     {
         public bool AddRoom(RoomModel Room)
         {
@@ -114,6 +114,28 @@ namespace VirtualRoom.Logic
             return rooms.Where(rM => rM.RoomID.Equals(RoomID)).FirstOrDefault();
         }
 
+        public UserModel GetUser(string userId)
+        {
+            UserModel uM = null;
+            //TODO Find user in DB, if not create anonymous one 
+
+            uM = new UserModel
+            {
+                UserId = userId,
+                Name = "Anonymous " + userId
+            };
+            return uM;
+        }
+
+        public IEnumerable<UserModel> GetUsers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<UserModel> GetUsersInRoom(Guid roomId)
+        {
+            throw new NotImplementedException();
+        }
 
         private List<RoomModel> CreateTestData()
         {

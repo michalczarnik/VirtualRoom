@@ -12,18 +12,18 @@ namespace VirtualRoom.Controllers
 {
     public class RoomApiController : ApiController
     {
-        RoomFileDatasource rFD;
+        FileDatasource rFD;
         JavaScriptSerializer serializer;
         public RoomApiController()
         {
-            rFD = new RoomFileDatasource();
+            rFD = new FileDatasource();
             serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
         }
 
         [ActionName("GetAll")]
         public string GetAll()
         {
-            rFD = new RoomFileDatasource();
+            rFD = new FileDatasource();
             return serializer.Serialize(rFD.GetAllRooms()); 
         }
 
@@ -32,7 +32,7 @@ namespace VirtualRoom.Controllers
         public HttpResponseMessage AddRoom([FromBody] dynamic value)
         {
             var objectParsed = (JObject)value;
-            rFD = new RoomFileDatasource();
+            rFD = new FileDatasource();
             RoomModel room = new RoomModel();
             Guid adminId = Guid.Empty;
             if (Guid.TryParse(objectParsed.Value<string>("adminid"), out adminId))
@@ -68,9 +68,9 @@ namespace VirtualRoom.Controllers
         [ActionName("RemoveRoom")]
         public HttpResponseMessage RemoveRoom([FromBody] dynamic value)
         {
-            var objectParsed = (JObject)value;
+            var parsedValue = (JObject)value;
             Guid id = Guid.Empty;
-            if (Guid.TryParse(objectParsed.Value<string>("roomid"), out id))
+            if (Guid.TryParse(parsedValue.Value<string>("roomid"), out id))
             {
                 if (rFD.DeleteRoom(id))
                 {
@@ -88,7 +88,7 @@ namespace VirtualRoom.Controllers
             var objectParsed = (JObject)value;
             if (objectParsed["roomid"] != null)
             {
-                rFD = new RoomFileDatasource();
+                rFD = new FileDatasource();
                 Guid id;
                 if (Guid.TryParse(objectParsed.Value<string>("roomid"), out id))
                 {

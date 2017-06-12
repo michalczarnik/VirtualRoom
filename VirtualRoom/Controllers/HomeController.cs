@@ -12,16 +12,16 @@ namespace VirtualRoom.Controllers
     {
         public ActionResult RoomListing()
         {
-            RoomFileDatasource rmd = new RoomFileDatasource();
+            FileDatasource rmd = new FileDatasource();
             var rooms = rmd.GetAllRooms();
-            rmd.DeleteRoom(Guid.Parse("e7095f2d-7a75-4ecc-af26-cebcc5adaeac"));
             return View(rooms);
         }
 
         public ActionResult Room(string id)
         {
-            RoomFileDatasource rFD = new RoomFileDatasource();
+            FileDatasource rFD = new FileDatasource();
             var room = rFD.GetRoom(Guid.Parse(id));
+            UserToRoomManagement.AddUserToRoom(Guid.Parse(id), Session.SessionID);
             return View(room);
         }
     }

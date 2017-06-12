@@ -17,7 +17,7 @@
             <li><a href="#">Contact</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add room</button>
             <button type="button" class="btn btn-default navbar-btn">Remove room</button>
         </ul>
     </div><!--/.nav-collapse -->
@@ -51,8 +51,8 @@
 
 @helper RenderRooms()
 {
-foreach (var room in Model)
-{
+    foreach (var room in Model)
+    {
         @RenderRoom(room);
     }
 }

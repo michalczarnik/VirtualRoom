@@ -134,7 +134,7 @@ namespace VirtualRoom.Logic
 
         public IEnumerable<UserModel> GetUsersInRoom(Guid roomId)
         {
-            throw new NotImplementedException();
+            return UserToRoomManagement.GetAllUsersForRoom(roomId);
         }
 
         private List<RoomModel> CreateTestData()

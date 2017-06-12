@@ -10,16 +10,14 @@
 <body>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="/scripts/RoomRequestor.js"></script>
 
-    <div class="title">
-        <h1>Virtual Room</h1>
-    </div>
-    <div class="container">
-        @RenderBody()
+    @RenderSection("scripts", required: false)
+    <div ng-app="VirtualRoom" ng-controller="VirtualRoomController">
+        <div class="container">
+            @RenderBody()
+        </div>
     </div>
 </body>
-<footer>
-    Icons made by <a href="http://www.flaticon.com/authors/dinosoftlabs">DinosoftLabs</a> from www.flaticon.com 
-</footer>
 </html>

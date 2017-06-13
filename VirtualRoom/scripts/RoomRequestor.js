@@ -9,13 +9,7 @@ function addRoom(name, description, capacity) {
         "name": name,
         "description": description,
         "capacity": capacity,
-        "users": [
-            "6e0ee133-012c-4800-b7d2-68ea93ef15e1",
-            "6e0ee133-012c-4800-b7d2-68ea93ef15e5",
-            "6e0ee133-012c-4800-b7d2-68ea93ef15e4",
-            "6e0ee133-012c-4800-b7d2-68ea93ef15e3",
-            "6e0ee133-012c-4800-b7d2-68ea93ef15e2"
-        ],
+        "users": [],
         "inonuri": "uritoicon"
     };
     http.post('/api/roomapi/addroom', requestData).then(function mySuccess(response) {
@@ -49,19 +43,45 @@ function changeRoomInfo(roomID, name, description, capacity) {
         name: name,
         description: description,
         capacity: capacity,
-        users: [
-            "6e0ee133-012c-4800-b7d2-68ea93ef15e1",
-            "6e0ee133-012c-4800-b7d2-68ea93ef15e5",
-            "6e0ee133-012c-4800-b7d2-68ea93ef15e4",
-            "6e0ee133-012c-4800-b7d2-68ea93ef15e3",
-            "6e0ee133-012c-4800-b7d2-68ea93ef15e2"
-        ],
+        users: [],
         inonuri: "uritoicon"
     });
     http.post('/api/roomapi/changeroom', requestData).then(function mySuccess(response) {
-        console.log('success')
+        console.log('success');
         console.log(response.data);
         document.location.href = "/";
+    }).catch(function myError(response) {
+        console.log('error')
+        console.log(response);
+    });
+}
+
+function getUsers(roomID) {
+    console.log('getUsers  ' + roomID);
+    var requestData = JSON.stringify({ roomid: roomID });
+    http.post('/api/roomapi/getusers', requestData).then(function mySuccess(response) {
+        console.log('success')
+        console.log(response.data);
+        console.log(JSON.parse(response.data));
+        JSON.parse(response.data).forEach(function(data) {
+            $("#circleContainer").append("<div class='field'>" + data.Name + "</div>");
+            console.log(data.Name);
+        });
+        var radius = 200;
+        var fields = $('.field'), container = $('#container'), width = container.width(), height = container.height();
+        var angle = 0, step = (2 * Math.PI) / fields.length;
+        fields.each(function () {
+            var x = Math.round(width / 2 + radius * Math.cos(angle) - $(this).width() / 2);
+            var y = Math.round(height / 2 + radius * Math.sin(angle) - $(this).height() / 2);
+            if (window.console) {
+                console.log($(this).text(), x, y);
+            }
+            $(this).css({
+                left: (x) + 'px',
+                top: (y+250) + 'px'
+            });
+            angle += step;
+        });
     }).catch(function myError(response) {
         console.log('error')
         console.log(response);
@@ -74,22 +94,7 @@ app.controller('VirtualRoomController', function ($scope, $http) {
     $scope.addRoom = addRoom;
     $scope.removeRoom = removeRoom;
     $scope.changeRoomInfo = changeRoomInfo;
+    $scope.getUsers = getUsers;
     scope = $scope;
     http = $http;
 });
-
-//<script>
-//    $(document).ready(function (){
-//        $(".removeRoom").click(function () {
-//            var roomId = "@Model.RoomID";
-//            $.ajax({
-//                type: 'POST',
-//                url: '/api/roomapi/removeroom',
-//                data: '{"roomid":"'+roomId+'"}', // or JSON.stringify ({name: 'jonas'}),
-//                success: function (data) { alert('data: '); console.log('success'); document.location.href = "/"; },
-//                contentType: "application/json",
-//                dataType: 'json'
-//            });
-//        });
-//    });
-//</script>

@@ -113,5 +113,28 @@ namespace VirtualRoom.Controllers
             }
         }
 
+        [HttpPost]
+        [ActionName("GetUsers")]
+        public HttpResponseMessage GetUsers([FromBody] dynamic value)
+        {
+            var objectParsed = (JObject)value;
+            if (objectParsed["roomid"] != null)
+            {
+                Guid id;
+                if (Guid.TryParse(objectParsed.Value<string>("roomid"), out id))
+                {
+                    IEnumerable<UserModel> users = UserToRoomManagement.GetAllUsersForRoom(id);
+                    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+                    return this.Request.CreateResponse(HttpStatusCode.OK, serializer.Serialize(users));    
+                }
+                else
+                    return this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "ID is in incorrect format");
+            }
+            else
+            {
+                return this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "No ID is provided");
+            }
+        }
+
     }
 }

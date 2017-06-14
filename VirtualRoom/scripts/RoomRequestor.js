@@ -64,7 +64,7 @@ function getUsers(roomID) {
         console.log(response.data);
         console.log(JSON.parse(response.data));
         JSON.parse(response.data).forEach(function(data) {
-            $("#circleContainer").append("<div class='field'>" + data.Name + "</div>");
+            $("#circleContainer").append("<div class='field' title='" + data.Name + "'><div class='field-value'>" + data.Name + "</div></div>");
             console.log(data.Name);
         });
         var radius = 200;
